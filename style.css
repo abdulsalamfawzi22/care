@@ -1,0 +1,209 @@
+:root {
+  --pink: #e79fb8;
+  --pink-dark: #dd8fac;
+  --pink-deep: #cf789b;
+  --white: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  font-family: "Baloo Bhaijaan 2", "Cairo", system-ui, sans-serif;
+  background: var(--pink);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ============ الشاشات ============ */
+.screen {
+  position: relative;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hidden { display: none !important; }
+
+/* ============ خلفية الأشعة الوردية ============ */
+.bg-swirl {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  background:
+    repeating-conic-gradient(from 0deg at 50% 42%,
+      var(--pink) 0deg 5deg,
+      var(--pink-dark) 5deg 10deg);
+  opacity: 0.55;
+  filter: blur(2px);
+  animation: spin 120s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============ النجوم اللامعة ============ */
+.sparkle {
+  position: absolute;
+  z-index: 2;
+  fill: var(--white);
+  filter: drop-shadow(0 0 8px rgba(255,255,255,.35));
+}
+.sparkle-1 { width: 58px; top: 20%; left: 10%; }
+.sparkle-2 { width: 46px; bottom: 10%; right: 12%; }
+
+/* ============ محتوى العد التنازلي ============ */
+.cd-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 5vh 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(18px, 4vh, 40px);
+}
+
+.cd-marks {
+  font-size: clamp(90px, 26vw, 170px);
+  font-weight: 800;
+  line-height: .8;
+  letter-spacing: -4px;
+}
+.cd-subtitle {
+  font-size: clamp(22px, 6.5vw, 40px);
+  font-weight: 700;
+}
+.cd-title {
+  font-size: clamp(46px, 13vw, 90px);
+  font-weight: 800;
+}
+
+/* ============ العداد ============ */
+.timer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(3px, 1vw, 8px);
+  direction: ltr;               /* الترتيب: يوم:ساعة:دقيقة:ثانية */
+  width: 100%;
+  max-width: 100%;
+}
+.unit { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.box {
+  background: var(--white);
+  color: var(--pink-deep);
+  border-radius: 14px;
+  width: clamp(50px, 15vw, 84px);
+  height: clamp(46px, 13vw, 74px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(24px, 7vw, 42px);
+  font-weight: 800;
+  box-shadow: 0 6px 16px rgba(160, 80, 110, .18);
+}
+.label {
+  font-size: clamp(11px, 3vw, 15px);
+  font-weight: 600;
+  opacity: .9;
+}
+.colon {
+  color: var(--white);
+  font-size: clamp(22px, 6vw, 40px);
+  font-weight: 800;
+  line-height: clamp(46px, 13vw, 74px);
+}
+
+.hourglass {
+  width: clamp(90px, 26vw, 150px);
+  margin-top: 6px;
+  filter: drop-shadow(0 6px 14px rgba(160, 80, 110, .2));
+}
+
+/* ============ صفحة الفعاليات ============ */
+#event-screen { align-items: flex-start; }
+.ev-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 480px;
+  padding: 7vh 6vw 12vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.ev-hero {
+  text-align: center;
+  font-size: clamp(34px, 10vw, 56px);
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.card {
+  background: rgba(255, 255, 255, .16);
+  backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(255, 255, 255, .35);
+  border-radius: 24px;
+  padding: 20px 20px 24px;
+}
+.card-title {
+  font-size: clamp(24px, 7vw, 32px);
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.prizes { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.prizes li {
+  background: rgba(255,255,255,.14);
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: clamp(16px, 4.5vw, 20px);
+  font-weight: 600;
+}
+
+.schedule { display: flex; flex-direction: column; gap: 12px; }
+.sched-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255,255,255,.14);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+.sched-day {
+  background: var(--white);
+  color: var(--pink-deep);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 800;
+  font-size: clamp(16px, 4.5vw, 20px);
+  white-space: nowrap;
+  min-width: 74px;
+  text-align: center;
+}
+.sched-info { display: flex; flex-direction: column; gap: 2px; }
+.sched-time { font-size: clamp(16px, 4.5vw, 20px); font-weight: 700; }
+.sched-place { font-size: clamp(14px, 4vw, 17px); font-weight: 600; opacity: .9; }
+
+.social { display: flex; flex-direction: column; gap: 10px; }
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(255,255,255,.16);
+  border: 1.5px solid rgba(255,255,255,.35);
+  border-radius: 14px;
+  padding: 14px 18px;
+  color: var(--white);
+  text-decoration: none;
+  font-size: clamp(16px, 4.5vw, 20px);
+  font-weight: 700;
+  transition: transform .12s ease, background .2s ease;
+}
+.social-btn:active { transform: scale(.97); background: rgba(255,255,255,.26); }
+
+.tbd { opacity: .75; font-weight: 600; font-size: .85em; }

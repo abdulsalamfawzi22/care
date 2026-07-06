@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#e29ab4" />
+  <title>العد التنازلي</title>
+
+  <!-- خط عربي مدوّر يشبه التصميم -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ الصفحة الأولى: العد التنازلي ============ -->
+  <section id="countdown-screen" class="screen">
+    <div class="bg-swirl"></div>
+
+    <!-- نجوم لامعة -->
+    <svg class="sparkle sparkle-1" viewBox="0 0 100 100"><path d="M50 0 C54 38 62 46 100 50 C62 54 54 62 50 100 C46 62 38 54 0 50 C38 46 46 38 50 0 Z"/></svg>
+    <svg class="sparkle sparkle-2" viewBox="0 0 100 100"><path d="M50 0 C54 38 62 46 100 50 C62 54 54 62 50 100 C46 62 38 54 0 50 C38 46 46 38 50 0 Z"/></svg>
+
+    <div class="cd-content">
+      <h1 class="cd-marks">؟؟</h1>
+      <p class="cd-subtitle">شيء كبير على وشك يبدأ</p>
+
+      <div class="timer" id="timer">
+        <div class="unit"><div class="box" id="days">00</div><span class="label">يوم</span></div>
+        <span class="colon">:</span>
+        <div class="unit"><div class="box" id="hours">00</div><span class="label">ساعة</span></div>
+        <span class="colon">:</span>
+        <div class="unit"><div class="box" id="minutes">00</div><span class="label">دقيقة</span></div>
+        <span class="colon">:</span>
+        <div class="unit"><div class="box" id="seconds">00</div><span class="label">ثانية</span></div>
+      </div>
+
+      <h2 class="cd-title">العد التنازلي</h2>
+
+      <!-- ساعة رملية -->
+      <svg class="hourglass" viewBox="0 0 120 160" fill="none" stroke="#ffffff" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M18 12 H102" />
+        <path d="M18 148 H102" />
+        <path d="M28 12 C28 55 92 55 92 80 C92 105 28 105 28 148" />
+        <path d="M92 12 C92 55 28 55 28 80 C28 105 92 105 92 148" />
+        <path d="M45 40 C52 50 68 50 75 40 Z" fill="#ffffff" stroke="none" />
+        <path d="M40 138 C48 118 72 118 80 138 Z" fill="#ffffff" stroke="none" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============ الصفحة الثانية: الجوائز والفعاليات ============ -->
+  <section id="event-screen" class="screen hidden">
+    <div class="bg-swirl"></div>
+
+    <div class="ev-content">
+      <h1 class="ev-hero">🎉 وصل الحدث!</h1>
+
+      <!-- الجوائز -->
+      <div class="card">
+        <h2 class="card-title">🏆 الجوائز</h2>
+        <ul class="prizes">
+          <li>الجائزة الأولى — <span class="tbd">(تُحدَّد لاحقاً)</span></li>
+          <li>الجائزة الثانية — <span class="tbd">(تُحدَّد لاحقاً)</span></li>
+          <li>الجائزة الثالثة — <span class="tbd">(تُحدَّد لاحقاً)</span></li>
+        </ul>
+      </div>
+
+      <!-- مواعيد الحافلة -->
+      <div class="card">
+        <h2 class="card-title">🚌 مواعيد الحافلة</h2>
+        <div class="schedule">
+          <div class="sched-row">
+            <div class="sched-day">يوم ١٨</div>
+            <div class="sched-info">
+              <div class="sched-time">٧:٠٠ — ١٠:٠٠ مساءً</div>
+              <div class="sched-place">فرع مكة</div>
+            </div>
+          </div>
+          <div class="sched-row">
+            <div class="sched-day">يوم ١٩</div>
+            <div class="sched-info">
+              <div class="sched-time">٧:٠٠ — ١٠:٠٠ مساءً</div>
+              <div class="sched-place">فرع الحمدانية</div>
+            </div>
+          </div>
+          <div class="sched-row">
+            <div class="sched-day">يوم ٢٠</div>
+            <div class="sched-info">
+              <div class="sched-time">٧:٠٠ — ١٠:٠٠ مساءً</div>
+              <div class="sched-place">فرع الحرازات</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- حسابات التواصل -->
+      <div class="card">
+        <h2 class="card-title">تابعونا 💬</h2>
+        <div class="social">
+          <a class="social-btn" href="#">إنستقرام <span class="tbd">@اسم_الحساب</span></a>
+          <a class="social-btn" href="#">تويتر / X <span class="tbd">@اسم_الحساب</span></a>
+          <a class="social-btn" href="#">تيك توك <span class="tbd">@اسم_الحساب</span></a>
+          <a class="social-btn" href="#">سناب شات <span class="tbd">@اسم_الحساب</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
