@@ -27,6 +27,38 @@ html, body {
 }
 .hidden { display: none !important; }
 
+/* شاشة الاحتفال (الألعاب النارية) */
+#celebration {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--pink);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#fw { position: absolute; inset: 0; z-index: 2; }
+.cel-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  animation: celPop .8s ease both;
+}
+.cel-emoji { font-size: clamp(70px, 22vw, 130px); line-height: 1; }
+.cel-title {
+  color: #fff;
+  font-size: clamp(46px, 13vw, 90px);
+  font-weight: 800;
+  margin-top: 10px;
+  text-shadow: 0 6px 22px rgba(150, 70, 100, .45);
+}
+@keyframes celPop {
+  0%   { opacity: 0; transform: scale(.5); }
+  60%  { transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 /* انتقال نهاية العد التنازلي */
 .fade-out { animation: fadeOut .7s ease forwards; }
 .fade-in { animation: fadeIn .8s ease forwards; }

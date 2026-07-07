@@ -17,6 +17,7 @@ const elMinutes = document.getElementById("minutes");
 const elSeconds = document.getElementById("seconds");
 
 const countdownScreen = document.getElementById("countdown-screen");
+const celebration     = document.getElementById("celebration");
 const eventScreen     = document.getElementById("event-screen");
 
 // تحويل الأرقام إلى أرقام عربية (٠١٢٣...)
@@ -25,15 +26,31 @@ function toArabic(num) {
   return String(num).padStart(2, "0").replace(/\d/g, (d) => map[d]);
 }
 
+function revealEventScreen() {
+  eventScreen.classList.remove("hidden");
+  eventScreen.classList.add("fade-in");
+  window.scrollTo(0, 0);
+}
+
 function showEventScreen(animate) {
   if (animate) {
-    // انتقال ناعم: تلاشي صفحة العد ثم ظهور صفحة الفعاليات
+    // 1) تلاشي صفحة العد  2) عرض الألعاب النارية  3) ظهور صفحة الفعاليات
     countdownScreen.classList.add("fade-out");
     setTimeout(() => {
       countdownScreen.classList.add("hidden");
-      eventScreen.classList.remove("hidden");
-      eventScreen.classList.add("fade-in");
-      window.scrollTo(0, 0);
+      celebration.classList.remove("hidden");
+      const finish = () => {
+        celebration.classList.add("fade-out");
+        setTimeout(() => {
+          celebration.classList.add("hidden");
+          revealEventScreen();
+        }, 700);
+      };
+      if (typeof window.startCelebration === "function") {
+        window.startCelebration(finish, 5200);
+      } else {
+        finish();
+      }
     }, 700);
   } else {
     countdownScreen.classList.add("hidden");

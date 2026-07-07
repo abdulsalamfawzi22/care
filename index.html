@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=6" />
+  <link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
 
@@ -50,6 +50,16 @@
       </svg>
     </div>
   </section>
+
+  <!-- ============ شاشة الاحتفال (الألعاب النارية) ============ -->
+  <div id="celebration" class="hidden">
+    <div class="bg-swirl"></div>
+    <canvas id="fw"></canvas>
+    <div class="cel-content">
+      <div class="cel-emoji">🎉</div>
+      <div class="cel-title">وصل الحدث!</div>
+    </div>
+  </div>
 
   <!-- ============ الصفحة الثانية: الجوائز والفعاليات ============ -->
   <section id="event-screen" class="screen hidden">
@@ -142,6 +152,7 @@
     </div>
   </section>
 
-  <script src="app.js?v=6"></script>
+  <script src="celebration.js?v=7"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>
