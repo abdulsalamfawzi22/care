@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=4" />
+  <link rel="stylesheet" href="style.css?v=5" />
 </head>
 <body>
 
@@ -59,13 +59,26 @@
       <h1 class="ev-hero">🎉 وصل الحدث!</h1>
 
       <!-- الجوائز -->
-      <div class="card">
+      <div class="card prize-card">
         <h2 class="card-title">🏆 الجوائز</h2>
-        <ul class="prizes">
-          <li>الجائزة الأولى — <span class="tbd">(تُحدَّد لاحقاً)</span></li>
-          <li>الجائزة الثانية — <span class="tbd">(تُحدَّد لاحقاً)</span></li>
-          <li>الجائزة الثالثة — <span class="tbd">(تُحدَّد لاحقاً)</span></li>
-        </ul>
+        <div class="prize-amount">
+          <span class="prize-num">+٥٠٬٠٠٠</span>
+          <span class="prize-cur">ريال</span>
+        </div>
+        <p class="prize-note">مجموع جوائز السحب يتجاوز ٥٠٬٠٠٠ ريال 🎁</p>
+      </div>
+
+      <!-- حملة الباص -->
+      <div class="card bus-card">
+        <h2 class="card-title">🚌 شفت الباص؟</h2>
+        <p class="bus-sub">إذا شفت باص منافس كير... لا تخليه يفوتك!</p>
+        <img class="bus-img" src="assets/bus.png" alt="باص منافس كير" />
+        <p class="bus-how">شارك بثلاث خطوات وادخل السحب:</p>
+        <div class="steps">
+          <div class="step"><span class="step-icon">📸</span><span class="step-text">صوّر الباص</span></div>
+          <div class="step"><span class="step-icon">🎬</span><span class="step-text">شارك الفيديو في تيك توك</span></div>
+          <div class="step"><span class="step-icon">🎁</span><span class="step-text">ادخل السحب على جوائز تتجاوز ٥٠٬٠٠٠ ريال</span></div>
+        </div>
       </div>
 
       <!-- مواعيد الحافلة -->
@@ -129,6 +142,6 @@
     </div>
   </section>
 
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
