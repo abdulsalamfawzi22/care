@@ -207,14 +207,15 @@ html, body {
   font-weight: 600;
 }
 
-/* بطاقة الجوائز (نفس شكل باقي البطاقات) */
+/* بطاقة الجوائز (صورة حافة-لـ-حافة بدون إطار) */
+.prize-card { padding: 0; overflow: hidden; background: transparent; border: none; }
 .prize-img {
   width: 100%;
   max-width: 100%;
   height: auto;
   display: block;
-  border-radius: 16px;
-  box-shadow: 0 10px 26px rgba(150,70,100,.22);
+  border-radius: 24px;
+  box-shadow: 0 14px 34px rgba(150,70,100,.26);
 }
 
 /* حملة الباص */
