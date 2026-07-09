@@ -208,24 +208,15 @@ html, body {
 }
 
 /* بطاقة الجوائز */
-.prize-card { text-align: center; }
-.prize-amount {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 10px;
-  direction: ltr;
-  margin: 6px 0 10px;
+.prize-card { padding: 0; overflow: hidden; background: transparent; border: none; }
+.prize-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 24px;
+  box-shadow: 0 14px 34px rgba(150,70,100,.26);
 }
-.prize-num {
-  font-size: clamp(52px, 16vw, 84px);
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
-  text-shadow: 0 4px 14px rgba(150,70,100,.28);
-}
-.prize-cur { font-size: clamp(22px, 6vw, 30px); font-weight: 800; color: #fff; }
-.prize-note { font-size: clamp(15px, 4.2vw, 19px); font-weight: 600; opacity: .95; }
 
 /* حملة الباص */
 .bus-card { text-align: center; }
