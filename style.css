@@ -85,20 +85,18 @@ html, body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ============ خلفية الأشعة الوردية ============ */
+/* ============ خلفية الأشعة الوردية (ثابتة تغطي الشاشة — خفيفة على الجوال) ============ */
 .bg-swirl {
-  position: absolute;
-  inset: -20%;
+  position: fixed;
+  inset: 0;
   z-index: 0;
+  pointer-events: none;
   background:
     repeating-conic-gradient(from 0deg at 50% 42%,
       var(--pink) 0deg 5deg,
       var(--pink-dark) 5deg 10deg);
-  opacity: 0.55;
-  filter: blur(2px);
-  animation: spin 120s linear infinite;
+  opacity: 0.5;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ============ النجوم اللامعة ============ */
 .sparkle {
