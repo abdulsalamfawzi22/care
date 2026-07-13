@@ -2,6 +2,9 @@
 const btn = document.getElementById("toggleBtn");
 const statusEl = document.getElementById("status");
 
+// المفتاح السري من الرابط (?key=...) — بدونه لن تُقبل الكتابة بعد تفعيل الحماية
+const WRITE_KEY = new URLSearchParams(location.search).get("key") || "";
+
 let watchId = null;
 let wakeLock = null;
 let sentCount = 0;
@@ -30,20 +33,33 @@ document.addEventListener("visibilitychange", () => {
 
 function onPosition(pos) {
   const c = pos.coords;
-  window.busRef.set({
-    lat: c.latitude,
-    lng: c.longitude,
-    speed: c.speed || 0,
-    heading: c.heading || 0,
-    accuracy: c.accuracy || 0,
-    updated: firebase.database.ServerValue.TIMESTAMP,
-  });
-  sentCount++;
-  setStatus(
-    "on",
-    `يتم إرسال الموقع ✅<br>عدد التحديثات: <span class="mono">${ar(sentCount)}</span><br>` +
-      `الدقة: <span class="mono">${ar(Math.round(c.accuracy || 0))}</span> م`
-  );
+  // تحديث ذرّي: الموقع في /bus + المفتاح في /gate (غير مقروء) للتحقق من الصلاحية
+  const update = {
+    bus: {
+      lat: c.latitude,
+      lng: c.longitude,
+      speed: c.speed || 0,
+      heading: c.heading || 0,
+      accuracy: c.accuracy || 0,
+      updated: firebase.database.ServerValue.TIMESTAMP,
+    },
+    "gate/k": WRITE_KEY,
+  };
+  firebase
+    .database()
+    .ref()
+    .update(update)
+    .then(() => {
+      sentCount++;
+      setStatus(
+        "on",
+        `يتم إرسال الموقع ✅<br>عدد التحديثات: <span class="mono">${ar(sentCount)}</span><br>` +
+          `الدقة: <span class="mono">${ar(Math.round(c.accuracy || 0))}</span> م`
+      );
+    })
+    .catch(() => {
+      setStatus("err", "❌ رابط السائق غير صالح (مفتاح خاطئ) — استخدم رابط السائق الصحيح");
+    });
 }
 
 function onError(err) {
