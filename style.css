@@ -283,19 +283,30 @@ html, body {
 
 .track-btn {
   display: block;
-  margin-top: 16px;
+  width: 100%;
+  margin-top: 12px;
   background: #fff;
   color: var(--pink-deep);
   text-decoration: none;
   text-align: center;
+  border: none;
   border-radius: 16px;
   padding: 15px 18px;
+  font-family: inherit;
   font-size: clamp(16px, 4.6vw, 20px);
   font-weight: 800;
+  cursor: pointer;
   box-shadow: 0 8px 20px rgba(150,70,100,.22);
   transition: transform .12s ease;
 }
 .track-btn:active { transform: scale(.97); }
+/* الزر الثانوي (فتح بملء الشاشة) — شفاف بإطار */
+.track-btn.ghost {
+  background: rgba(255,255,255,.16);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,.5);
+  box-shadow: none;
+}
 
 .schedule { display: flex; flex-direction: column; gap: 12px; }
 .sched-row {

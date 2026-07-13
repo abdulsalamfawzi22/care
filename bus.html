@@ -33,6 +33,13 @@
       box-shadow: 0 6px 16px rgba(0,0,0,.2); cursor: pointer;
     }
     .recenter:active { transform: scale(.96); }
+    .gmaps {
+      position: absolute; bottom: 24px; inset-inline-end: 16px; z-index: 500;
+      background: #cf789b; color: #fff; border: none; border-radius: 14px;
+      padding: 12px 16px; font-family: inherit; font-weight: 800; font-size: 15px;
+      box-shadow: 0 6px 16px rgba(0,0,0,.2); cursor: pointer;
+    }
+    .gmaps:active { transform: scale(.96); }
     .leaflet-container { font-family: inherit; }
   </style>
 </head>
@@ -44,11 +51,12 @@
 
   <div id="map"></div>
   <button class="recenter" id="recenter">📍 توسيط على الباص</button>
+  <button class="gmaps" id="gmapsBtn">🧭 التوجّه للباص</button>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
   <script src="firebase-init.js?v=1"></script>
-  <script src="bus.js?v=1"></script>
+  <script src="bus.js?v=2"></script>
 </body>
 </html>

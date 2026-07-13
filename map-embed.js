@@ -73,6 +73,18 @@
       if (firstFix) { map.setView(lastPos, 15); firstFix = false; }
     });
 
+    // زر التوجّه للباص عبر خرائط قوقل (يستخدم آخر موقع)
+    const gmapsBtn = document.getElementById("gmapsBtn");
+    if (gmapsBtn) {
+      gmapsBtn.addEventListener("click", () => {
+        if (!lastPos) { setStatus("off", "لا يوجد موقع للباص بعد"); return; }
+        window.open(
+          `https://www.google.com/maps/dir/?api=1&destination=${lastPos[0]},${lastPos[1]}`,
+          "_blank"
+        );
+      });
+    }
+
     setInterval(() => {
       if (!lastPos) return;
       const age = Math.round((Date.now() - lastUpdated) / 1000);

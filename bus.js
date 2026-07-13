@@ -66,3 +66,9 @@ recenterBtn.addEventListener("click", () => {
   if (lastPos) map.setView(lastPos, 16);
   else setStatus("off", "لا يوجد موقع للباص بعد");
 });
+
+// زر التوجّه للباص عبر خرائط قوقل
+document.getElementById("gmapsBtn").addEventListener("click", () => {
+  if (!lastPos) { setStatus("off", "لا يوجد موقع للباص بعد"); return; }
+  window.open(`https://www.google.com/maps/dir/?api=1&destination=${lastPos[0]},${lastPos[1]}`, "_blank");
+});
