@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=11" />
+  <link rel="stylesheet" href="style.css?v=12" />
 </head>
 <body>
 
@@ -84,7 +84,14 @@
           <div class="step"><span class="step-icon">🎬</span><span class="step-text">شارك الفيديو في تيك توك</span></div>
           <div class="step"><span class="step-icon">🎁</span><span class="step-text">ادخل السحب على جوائز بقيمة ١٥٠٬٠٠٠ ريال</span></div>
         </div>
-        <a class="track-btn" href="bus.html">📍 تتبّع الباص مباشرة على الخريطة</a>
+      </div>
+
+      <!-- موقع الباص المباشر -->
+      <div class="card map-card">
+        <h2 class="card-title">📍 موقع الباص المباشر</h2>
+        <div class="map-status" id="mapStatus"><span class="dot off"></span> جاري الاتصال...</div>
+        <div id="event-map"></div>
+        <a class="track-btn" href="bus.html" target="_blank" rel="noopener">🗺️ فتح الخريطة بملء الشاشة</a>
       </div>
 
       <!-- مواعيد الحافلة -->
@@ -148,7 +155,8 @@
     </div>
   </section>
 
-  <script src="celebration.js?v=11"></script>
-  <script src="app.js?v=11"></script>
+  <script src="map-embed.js?v=12"></script>
+  <script src="celebration.js?v=12"></script>
+  <script src="app.js?v=12"></script>
 </body>
 </html>

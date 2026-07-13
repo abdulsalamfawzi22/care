@@ -30,6 +30,7 @@ function revealEventScreen() {
   eventScreen.classList.remove("hidden");
   eventScreen.classList.add("fade-in");
   window.scrollTo(0, 0);
+  if (typeof window.initBusMap === "function") window.initBusMap();
 }
 
 function showEventScreen(animate) {
@@ -54,7 +55,7 @@ function showEventScreen(animate) {
     }, 700);
   } else {
     countdownScreen.classList.add("hidden");
-    eventScreen.classList.remove("hidden");
+    revealEventScreen();
   }
 }
 

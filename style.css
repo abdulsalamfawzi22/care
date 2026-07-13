@@ -265,6 +265,22 @@ html, body {
 .step-icon { flex: 0 0 auto; font-size: clamp(24px, 7vw, 32px); }
 .step-text { font-size: clamp(15px, 4.3vw, 19px); font-weight: 700; line-height: 1.4; }
 
+/* خريطة الباص المدمجة */
+.map-status {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: rgba(255,255,255,.18); border-radius: 999px; padding: 9px 16px;
+  font-weight: 700; font-size: clamp(14px, 4vw, 17px); margin-bottom: 14px;
+}
+.map-status .dot { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
+.map-status .on { background: #35d07f; box-shadow: 0 0 10px #35d07f; }
+.map-status .off { background: #ffcf3f; }
+#event-map {
+  height: 320px; width: 100%; border-radius: 16px; overflow: hidden;
+  background: #dcdcdc; box-shadow: 0 8px 20px rgba(150,70,100,.18);
+}
+.bus-marker { font-size: 32px; line-height: 1; text-align: center; filter: drop-shadow(0 3px 4px rgba(0,0,0,.3)); }
+.leaflet-container { font-family: inherit; }
+
 .track-btn {
   display: block;
   margin-top: 16px;
