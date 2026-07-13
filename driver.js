@@ -33,7 +33,9 @@ document.addEventListener("visibilitychange", () => {
 
 function onPosition(pos) {
   const c = pos.coords;
-  // تحديث ذرّي: الموقع في /bus + المفتاح في /gate (غير مقروء) للتحقق من الصلاحية
+  // رمز عشوائي يتغيّر كل إرسال — يمنع إعادة استخدام كتابة قديمة أو الكتابة المباشرة
+  const nonce = Date.now().toString(36) + Math.random().toString(36).slice(2);
+  // تحديث ذرّي: الموقع في /bus + المفتاح والرمز في /gate (غير مقروء) للتحقق من الصلاحية
   const update = {
     bus: {
       lat: c.latitude,
@@ -42,8 +44,10 @@ function onPosition(pos) {
       heading: c.heading || 0,
       accuracy: c.accuracy || 0,
       updated: firebase.database.ServerValue.TIMESTAMP,
+      n: nonce,
     },
     "gate/k": WRITE_KEY,
+    "gate/t": nonce,
   };
   firebase
     .database()
