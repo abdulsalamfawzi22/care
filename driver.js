@@ -1,0 +1,87 @@
+// ===== صفحة السائق: ترسل موقع الباص لحظياً إلى Firebase =====
+const btn = document.getElementById("toggleBtn");
+const statusEl = document.getElementById("status");
+
+let watchId = null;
+let wakeLock = null;
+let sentCount = 0;
+let running = false;
+
+function setStatus(cls, html) {
+  statusEl.innerHTML = `<span class="dot ${cls}"></span> ${html}`;
+}
+
+function ar(n) {
+  return String(n).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
+}
+
+async function requestWakeLock() {
+  try {
+    if ("wakeLock" in navigator) {
+      wakeLock = await navigator.wakeLock.request("screen");
+    }
+  } catch (e) { /* تجاهل */ }
+}
+
+// إعادة قفل الإبقاء على الشاشة عند الرجوع للصفحة
+document.addEventListener("visibilitychange", () => {
+  if (running && document.visibilityState === "visible") requestWakeLock();
+});
+
+function onPosition(pos) {
+  const c = pos.coords;
+  window.busRef.set({
+    lat: c.latitude,
+    lng: c.longitude,
+    speed: c.speed || 0,
+    heading: c.heading || 0,
+    accuracy: c.accuracy || 0,
+    updated: firebase.database.ServerValue.TIMESTAMP,
+  });
+  sentCount++;
+  setStatus(
+    "on",
+    `يتم إرسال الموقع ✅<br>عدد التحديثات: <span class="mono">${ar(sentCount)}</span><br>` +
+      `الدقة: <span class="mono">${ar(Math.round(c.accuracy || 0))}</span> م`
+  );
+}
+
+function onError(err) {
+  let msg = "خطأ في تحديد الموقع";
+  if (err.code === 1) msg = "❌ رفضت إذن الموقع — فعّله من إعدادات المتصفح ثم أعد المحاولة";
+  else if (err.code === 2) msg = "❌ الموقع غير متاح — تأكد أن GPS مفعّل";
+  else if (err.code === 3) msg = "⏳ انتهت المهلة — جاري إعادة المحاولة...";
+  setStatus("err", msg);
+}
+
+async function start() {
+  if (!navigator.geolocation) {
+    setStatus("err", "❌ جهازك لا يدعم تحديد الموقع");
+    return;
+  }
+  running = true;
+  sentCount = 0;
+  btn.textContent = "⏹️ إيقاف الإرسال";
+  btn.classList.add("stop");
+  setStatus("off", "⏳ جاري الحصول على الموقع...");
+  await requestWakeLock();
+  watchId = navigator.geolocation.watchPosition(onPosition, onError, {
+    enableHighAccuracy: true,
+    maximumAge: 2000,
+    timeout: 20000,
+  });
+}
+
+async function stop() {
+  running = false;
+  if (watchId !== null) navigator.geolocation.clearWatch(watchId);
+  watchId = null;
+  if (wakeLock) { try { await wakeLock.release(); } catch (e) {} wakeLock = null; }
+  btn.textContent = "▶️ ابدأ إرسال الموقع";
+  btn.classList.remove("stop");
+  setStatus("off", "متوقف — الباص غير نشط الآن");
+}
+
+btn.addEventListener("click", () => {
+  if (running) stop(); else start();
+});

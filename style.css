@@ -265,6 +265,22 @@ html, body {
 .step-icon { flex: 0 0 auto; font-size: clamp(24px, 7vw, 32px); }
 .step-text { font-size: clamp(15px, 4.3vw, 19px); font-weight: 700; line-height: 1.4; }
 
+.track-btn {
+  display: block;
+  margin-top: 16px;
+  background: #fff;
+  color: var(--pink-deep);
+  text-decoration: none;
+  text-align: center;
+  border-radius: 16px;
+  padding: 15px 18px;
+  font-size: clamp(16px, 4.6vw, 20px);
+  font-weight: 800;
+  box-shadow: 0 8px 20px rgba(150,70,100,.22);
+  transition: transform .12s ease;
+}
+.track-btn:active { transform: scale(.97); }
+
 .schedule { display: flex; flex-direction: column; gap: 12px; }
 .sched-row {
   display: flex;
