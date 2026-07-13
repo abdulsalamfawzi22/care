@@ -1,8 +1,9 @@
-// ===== خريطة الباص المدمجة في صفحة الفعاليات =====
-// تُحمّل مكتباتها (Leaflet + Firebase) فقط عند فتح الصفحة الثانية — تبقى صفحة العد خفيفة.
+// ===== خريطة الباص المدمجة (قابلة لإعادة الاستخدام في أي صفحة) =====
+// تُحمّل مكتباتها (Leaflet + Firebase) عند الحاجة فقط — تبقى الصفحات خفيفة.
 (function () {
-  let loaded = false;
-  let loading = false;
+  let libsLoaded = false;
+  let libsLoading = null;
+  const built = {};
 
   function loadScript(src) {
     return new Promise((resolve, reject) => {
@@ -23,31 +24,48 @@
     return String(n).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
   }
 
-  window.initBusMap = async function () {
-    if (loaded) {
-      if (window._busMap) setTimeout(() => window._busMap.invalidateSize(), 100);
-      return;
-    }
-    if (loading) return;
-    loading = true;
-    try {
+  function ensureLibs() {
+    if (libsLoaded) return Promise.resolve();
+    if (libsLoading) return libsLoading;
+    libsLoading = (async () => {
       loadCss("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css");
       await loadScript("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js");
       await loadScript("https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js");
       await loadScript("https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js");
       await loadScript("firebase-init.js?v=1");
-      loaded = true;
-      buildMap();
-    } catch (e) {
-      const s = document.getElementById("mapStatus");
-      if (s) s.innerHTML = '<span class="dot off"></span> تعذّر تحميل الخريطة';
+      libsLoaded = true;
+    })();
+    return libsLoading;
+  }
+
+  // إنشاء خريطة داخل عنصر محدد
+  window.initBusMapIn = async function (mapId, statusId, gmapsId) {
+    if (built[mapId]) {
+      setTimeout(() => built[mapId].invalidateSize(), 100);
+      return;
     }
+    if (!document.getElementById(mapId)) return;
+    built[mapId] = "loading";
+    try {
+      await ensureLibs();
+    } catch (e) {
+      const s = document.getElementById(statusId);
+      if (s) s.innerHTML = '<span class="dot off"></span> تعذّر تحميل الخريطة';
+      built[mapId] = null;
+      return;
+    }
+    buildMap(mapId, statusId, gmapsId);
   };
 
-  function buildMap() {
-    const statusEl = document.getElementById("mapStatus");
-    const map = L.map("event-map", { zoomControl: true }).setView([21.42, 39.83], 10);
-    window._busMap = map;
+  // توافق مع النداء القديم (خريطة صفحة الفعاليات)
+  window.initBusMap = function () {
+    return window.initBusMapIn("event-map", "mapStatus", "gmapsBtn");
+  };
+
+  function buildMap(mapId, statusId, gmapsId) {
+    const statusEl = document.getElementById(statusId);
+    const map = L.map(mapId, { zoomControl: true }).setView([21.42, 39.83], 10);
+    built[mapId] = map;
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       attribution: "&copy; OpenStreetMap",
@@ -73,15 +91,11 @@
       if (firstFix) { map.setView(lastPos, 15); firstFix = false; }
     });
 
-    // زر التوجّه للباص عبر خرائط قوقل (يستخدم آخر موقع)
-    const gmapsBtn = document.getElementById("gmapsBtn");
+    const gmapsBtn = gmapsId && document.getElementById(gmapsId);
     if (gmapsBtn) {
       gmapsBtn.addEventListener("click", () => {
         if (!lastPos) { setStatus("off", "لا يوجد موقع للباص بعد"); return; }
-        window.open(
-          `https://www.google.com/maps/dir/?api=1&destination=${lastPos[0]},${lastPos[1]}`,
-          "_blank"
-        );
+        window.open(`https://www.google.com/maps/dir/?api=1&destination=${lastPos[0]},${lastPos[1]}`, "_blank");
       });
     }
 

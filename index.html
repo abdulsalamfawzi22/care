@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=13" />
+  <link rel="stylesheet" href="style.css?v=14" />
 </head>
 <body>
 
@@ -19,11 +19,11 @@
   <section id="countdown-screen" class="screen">
     <div class="bg-swirl"></div>
 
-    <!-- نجوم لامعة -->
-    <svg class="sparkle sparkle-1" viewBox="0 0 100 100"><path d="M50 0 C54 38 62 46 100 50 C62 54 54 62 50 100 C46 62 38 54 0 50 C38 46 46 38 50 0 Z"/></svg>
-    <svg class="sparkle sparkle-2" viewBox="0 0 100 100"><path d="M50 0 C54 38 62 46 100 50 C62 54 54 62 50 100 C46 62 38 54 0 50 C38 46 46 38 50 0 Z"/></svg>
-
     <div class="cd-content">
+      <!-- نجوم لامعة -->
+      <svg class="sparkle sparkle-1" viewBox="0 0 100 100"><path d="M50 0 C54 38 62 46 100 50 C62 54 54 62 50 100 C46 62 38 54 0 50 C38 46 46 38 50 0 Z"/></svg>
+      <svg class="sparkle sparkle-2" viewBox="0 0 100 100"><path d="M50 0 C54 38 62 46 100 50 C62 54 54 62 50 100 C46 62 38 54 0 50 C38 46 46 38 50 0 Z"/></svg>
+
       <h1 class="cd-marks">؟؟</h1>
       <p class="cd-subtitle">شيء كبير على وشك يبدأ</p>
 
@@ -48,6 +48,19 @@
         <path d="M45 40 C52 50 68 50 75 40 Z" fill="#ffffff" stroke="none" />
         <path d="M40 138 C48 118 72 118 80 138 Z" fill="#ffffff" stroke="none" />
       </svg>
+
+      <div class="scroll-hint">🚌 تتبّع الباص مباشرة <span class="chev">⌄</span></div>
+    </div>
+
+    <!-- خريطة الباص المباشرة في صفحة العد -->
+    <div class="cd-extra">
+      <div class="card map-card">
+        <h2 class="card-title">📍 موقع الباص المباشر</h2>
+        <div class="map-status" id="cdMapStatus"><span class="dot off"></span> اسحب لتحميل الخريطة...</div>
+        <div id="cd-map"></div>
+        <button class="track-btn gmaps-btn" id="cdGmapsBtn" type="button">🧭 التوجّه للباص عبر خرائط قوقل</button>
+        <a class="track-btn ghost" href="bus.html" target="_blank" rel="noopener">🗺️ فتح الخريطة بملء الشاشة</a>
+      </div>
     </div>
   </section>
 
@@ -156,8 +169,8 @@
     </div>
   </section>
 
-  <script src="map-embed.js?v=13"></script>
-  <script src="celebration.js?v=13"></script>
-  <script src="app.js?v=13"></script>
+  <script src="map-embed.js?v=14"></script>
+  <script src="celebration.js?v=14"></script>
+  <script src="app.js?v=14"></script>
 </body>
 </html>

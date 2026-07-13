@@ -84,6 +84,25 @@ function tick() {
 tick();
 const timer = setInterval(tick, 1000);
 
+// ===== خريطة الباص في صفحة العد — تُحمّل عند التمرير إليها فقط =====
+const cdMapEl = document.getElementById("cd-map");
+if (cdMapEl && typeof window.initBusMapIn === "function") {
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          window.initBusMapIn("cd-map", "cdMapStatus", "cdGmapsBtn");
+          io.disconnect();
+        }
+      },
+      { rootMargin: "250px" }
+    );
+    io.observe(cdMapEl);
+  } else {
+    window.initBusMapIn("cd-map", "cdMapStatus", "cdGmapsBtn");
+  }
+}
+
 // ===== للاختبار فقط: أضف ?preview=event في نهاية الرابط لعرض صفحة الفعاليات مباشرة =====
 if (params.get("preview") === "event") {
   showEventScreen(false);
